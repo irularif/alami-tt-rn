@@ -49,6 +49,12 @@ const CounterInput = (props: CounterInputProps) => {
     []
   );
 
+  useEffect(() => {
+    if (value != _value) {
+      _setValue(value);
+    }
+  }, [value]);
+
   return (
     <View style={Styles.wrapper}>
       <TouchableOpacity onPress={subtraction} style={Styles.button}>

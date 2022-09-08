@@ -16,6 +16,7 @@ import Item from "./Item";
 import { debounce } from "lodash";
 import colors from "@assets/colors";
 import useCart from "@app/hooks/cart/useCart";
+import { useNavigation } from "@react-navigation/native";
 
 const HomePage = () => {
   const searchState = useState("");
@@ -71,6 +72,7 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
+  const { navigate } = useNavigation();
   const { searchState } = props;
   const { cart } = useCart();
   const [_, setSearch] = searchState;
@@ -89,12 +91,16 @@ const Header = (props: HeaderProps) => {
   const totalCart = useMemo(() => {
     return cart.data.length;
   }, [cart]);
-  
+
+  const openCart = () => {
+    navigate("Cart" as never);
+  };
+
   return (
     <>
       <TopBar>
         <Text style={topBarStyles.title}>ALAMI</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={openCart}>
           <Ionicons name="cart-outline" color="#fff" size={32} />
           {!!totalCart && (
             <View style={Styles.badge}>
