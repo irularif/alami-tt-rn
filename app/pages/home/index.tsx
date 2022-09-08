@@ -15,6 +15,7 @@ import { FlashList } from "@shopify/flash-list";
 import Item from "./Item";
 import { debounce } from "lodash";
 import colors from "@assets/colors";
+import useCart from "@app/hooks/cart/useCart";
 
 const HomePage = () => {
   const searchState = useState("");
@@ -71,6 +72,7 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const { searchState } = props;
+  const { cart } = useCart();
   const [_, setSearch] = searchState;
   const [keyword, setKeyword] = useState("");
 
@@ -84,12 +86,21 @@ const Header = (props: HeaderProps) => {
     onSetSearch(value);
   }, []);
 
+  const totalCart = useMemo(() => {
+    return cart.data.length;
+  }, [cart]);
+  
   return (
     <>
       <TopBar>
         <Text style={topBarStyles.title}>ALAMI</Text>
         <TouchableOpacity>
           <Ionicons name="cart-outline" color="#fff" size={32} />
+          {!!totalCart && (
+            <View style={Styles.badge}>
+              <Text style={Styles.badgeText}>{totalCart}</Text>
+            </View>
+          )}
         </TouchableOpacity>
       </TopBar>
       <View style={Styles.wrapper}>
@@ -115,6 +126,20 @@ const Styles = StyleSheet.create({
     borderColor: colors.divider,
     padding: 8,
     paddingVertical: 12,
+  },
+  badge: {
+    borderRadius: 99,
+    backgroundColor: colors.pending,
+    position: "absolute",
+    bottom: -5,
+    right: 0,
+    padding: 2,
+    paddingHorizontal: 4,
+  },
+  badgeText: {
+    color: "#fff",
+    fontSize: 10,
+    fontWeight: "600",
   },
 });
 
