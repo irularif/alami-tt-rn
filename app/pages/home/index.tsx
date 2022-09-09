@@ -62,6 +62,11 @@ const HomePage = () => {
         estimatedItemSize={100}
         renderItem={(item) => <Item {...item} />}
         keyExtractor={(item) => String(item.id)}
+        ListEmptyComponent={
+          <View style={Styles.empty}>
+            <Text>{isLoading ? "Loading..." : "The product is empty."}</Text>
+          </View>
+        }
       />
     </Page>
   );
@@ -146,6 +151,10 @@ const Styles = StyleSheet.create({
     color: "#fff",
     fontSize: 10,
     fontWeight: "600",
+  },
+  empty: {
+    padding: 30,
+    alignItems: "center",
   },
 });
 
