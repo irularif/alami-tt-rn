@@ -10,6 +10,6 @@ To run this app, you need the Expo Go app. After that, you need to run this comm
 - `$ npm install --global expo-cli eas-cli` - This installs expo command-line interface.
 - `$ npm install` - This installs all required Node libraries
 - `$ npm run prebuild` - This for creating native projects
-- `$ npm run:ios` - To run the Shopping Cart App on IOS Emulator
 - `$ npm run:android` - To run the Shopping Cart App on Android Emulator
-- `$ npm start` - To run the Shopping Cart App on Expo Go.
+- `$ cd ios && pod install` - To install ios dependencies
+- `$ npm run:ios` - To run the Shopping Cart App on IOS Emulator

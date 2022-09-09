@@ -17,7 +17,7 @@ const Item = (props: ItemProps) => {
   const { item } = props;
 
   return (
-    <TouchableOpacity style={Styles.button}>
+    <View style={Styles.button}>
       <Image
         source={{
           uri: item.thumbnail,
@@ -34,7 +34,7 @@ const Item = (props: ItemProps) => {
           <ActionItem {...props} />
         </View>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 
@@ -63,7 +63,7 @@ const ActionItem = (props: ItemProps) => {
 
   const add = useCallback(() => {
     addToCart(item);
-  }, []);
+  }, [item]);
 
   if (inCart) {
     return (
